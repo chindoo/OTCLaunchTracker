@@ -21,7 +21,9 @@ static NSString * const OTCLaunchTrackerComparisonDateKey = @"OTCLaunchTrackerCo
     currentNumberOfLaunches += 1;
     
     // Check to see if the number of launches meets the criteria
-    numberOfLaunchesOnTarget = currentNumberOfLaunches == self.numberOfLaunchesBeforeActivating;
+    if (self.numberOfLaunchesBeforeActivating > 0) {
+        numberOfLaunchesOnTarget = currentNumberOfLaunches == self.numberOfLaunchesBeforeActivating;
+    }
     
     // This is the date we'll use to see
     // if we should activate if enough
@@ -41,7 +43,9 @@ static NSString * const OTCLaunchTrackerComparisonDateKey = @"OTCLaunchTrackerCo
     NSInteger numberOfDaysElapsed = [dateComponents day];
     
     // Does the number of days meet the criteria?
-    numberOfDaysOnTarget = numberOfDaysElapsed == self.numberOfDaysBeforeActivating;
+    if (self.numberOfDaysBeforeActivating > 0) {
+        numberOfDaysOnTarget = numberOfDaysElapsed == self.numberOfDaysBeforeActivating;
+    }
     
     // Save the changed comparisons
     [userDefaults setInteger:currentNumberOfLaunches forKey:OTCLaunchTrackerNumberOfLaunchesKey];
