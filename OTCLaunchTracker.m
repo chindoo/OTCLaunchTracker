@@ -22,7 +22,7 @@ static NSString * const OTCLaunchTrackerComparisonDateKey = @"OTCLaunchTrackerCo
     
     // Check to see if the number of launches meets the criteria
     if (self.numberOfLaunchesBeforeActivating > 0) {
-        numberOfLaunchesOnTarget = currentNumberOfLaunches == self.numberOfLaunchesBeforeActivating;
+        numberOfLaunchesOnTarget = currentNumberOfLaunches >= self.numberOfLaunchesBeforeActivating;
     }
     
     // This is the date we'll use to see
@@ -44,7 +44,7 @@ static NSString * const OTCLaunchTrackerComparisonDateKey = @"OTCLaunchTrackerCo
     
     // Does the number of days meet the criteria?
     if (self.numberOfDaysBeforeActivating > 0) {
-        numberOfDaysOnTarget = numberOfDaysElapsed == self.numberOfDaysBeforeActivating;
+        numberOfDaysOnTarget = numberOfDaysElapsed >= self.numberOfDaysBeforeActivating;
     }
     
     // Save the changed comparisons
@@ -54,8 +54,13 @@ static NSString * const OTCLaunchTrackerComparisonDateKey = @"OTCLaunchTrackerCo
     
     // Check to see if we should activate
     BOOL isActivated = numberOfLaunchesOnTarget == YES || numberOfDaysOnTarget == YES;
+    if (isActivated == YES) {
+        [self reset];
+    }
     return isActivated;
 }
+
+#pragma mark - Private methods
 
 - (void)reset {
     // Remove objects so we can start from scratch in the next launch
