@@ -9,6 +9,6 @@ OTCLaunchTracker *launchTracker = [[OTCLaunchTracker alloc] init];
 launchTracker.numberOfLaunchesBeforeActivating = 10;
 launchTracker.numberOfDaysBeforeActivating = 7;
 if ([launchTracker isActivated] == YES) {
-	[self presentRatingReminder];
+	// One or both of the conditions is true
 }
 ```
