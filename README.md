@@ -10,9 +10,5 @@ launchTracker.numberOfLaunchesBeforeActivating = 10;
 launchTracker.numberOfDaysBeforeActivating = 7;
 if ([launchTracker isActivated] == YES) {
 	[self presentRatingReminder];
-	[launchTracker reset];
 }
 ```
-
-## Todo
-* If the number of days since the last check exceeds the activation number, 'isActivated' should still be true
